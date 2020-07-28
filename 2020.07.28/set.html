@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+
+    let s = new Set();
+    //set 是一个数据结构 是一个构造函数 
+    // 用 数据去重 
+
+    var arr = [1,2,3,4,5,6,7,8,9,0];
+
+    arr.forEach((item) => {
+        return s.add(item);
+        // 往s里面添加s里面没有的元素
+    });
+
+    s.clear(); //清空 Set
+
+    s.size //返回s的长度
+
+    // Set数组和普通数组的转换
+
+    var res = [1,2,3,4,5,6,8,9,0];
+
+    var set = new Set(res);
+    // 这里的set 是去重后的res
+
+    //如何在变成普通的 
+    var array = [...set]
+    // 变回来了  
+    
+</script>
+</html>

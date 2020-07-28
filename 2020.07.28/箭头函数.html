@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let a = 12121212
+        let foo = (a, b) => {
+            console.log(a)
+        }
+        console.log(foo())
+
+        var obj = {
+            foo,
+        }
+        // es6 当中对象的key和value一样的时候 
+        // 可以直接 foo,这样写
+
+        // setTimeout和setInterval 的this永远指向window 
+
+        setTimeout(() => { //由于箭头函数指向上一层作用域 
+            //所以说 这里的this 需要自己判断  
+            console.log(this)
+        });
+        // 异步里面的function()永远指向的是window
+        // 解决方式 call apply bind 
+        //     方式二 箭头函数 
+
+        // 只有匿名函数 才能转化成箭头函数 
+        var bar = a => 1 + a
+        // 这也是箭头函数简写
+        // 箭头函数内部没用argument 但是可以用rest
+    </script>
+</body>
+
+</html>

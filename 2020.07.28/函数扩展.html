@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    function A(x, y) {
+        y = y || '默认值'; //给形参设置默认值  老方法
+        console.log(y)
+    }
+    foo();
+
+    function B(x, y = '默认值') {
+        console.log(y)
+    }
+    // 在es6 当中 不允许形参 函数名重复 
+    // es6 以后禁止 6种声明方式名称重复 
+    // 在同一个作用域中      
+
+    function foo(){
+
+    }
+    console.log(foo.length); //输出 函数没赋值的 参数 大小 
+
+    function thowError(a){
+        
+    }
+</script>
+
+</html>

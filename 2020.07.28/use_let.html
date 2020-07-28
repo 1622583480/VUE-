@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>我是Text</h1>
+    <h1>我是Text</h1>
+    <h1>我是Text</h1>
+    <h1>我是Text</h1>
+    <h1>我是Text</h1>
+    <h1>我是Text</h1>
+</body>
+<script>
+    var h = document.querySelectorAll('h1')
+    for (let i = 0; i < h.length; i++) {
+        h[i].onclick = function () {
+            h[i].style.color = 'red'
+        }
+    }
+</script>
+
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    console.log(a); // undefined
+    //console.log(b); // 报错 未定义  暂时性
+    // 暂时性死区  let b上面的 部分无法使用b
+    var a = 122345;
+    let b = 'WDF????';
+    var a = 'pasdiopasdio';
+    // let b = 'error'; // 报错 b 已经存在
+
+    A();
+    function A() {
+        let WDWD = 'Hello'
+        B();
+        function B() {
+            let NMNM = 'World'
+            console.log(WDWD) // 可以输出
+        }
+        console.log(WDWD);// 可以输出
+        console.log(NMNM);// 报错
+    }
+    var tmp = ''
+    //只要在一个块级作用域内let了一个变量  
+    // 
+    if (true) {
+        tmp = 123123123 // 暂时性死区
+        let tmp; //虽然let无变量声明提升 
+        // 但是let变量会绑定 一个 
+    }
+    for (let i = 0; i < 10; i++) {
+        // 如果使用了 let (let i = 0) 括号 ()自己会形成一个父作用域 
+        // {} 内部的代码为子作用域 
+        // 每一次的let i 都是一个新的变量 
+        // 所以说 每次循环都会创建一个 新的变量 而js引擎都会记住上一次的循环i的 值 
+        // 所以说形成了三个各自独立的作用域  所以说 0123456789
+        setTimeout(function () {
+            console.log(i);
+        }, 0);
+    }
+    /**
+     * 所以内部形成的就是
+     * { 
+     * let i = 0
+     *  setTimeout(function(){
+            console.log(i);
+        },0);
+     * }
+     * 
+     * let i = 1
+     *  setTimeout(function(){
+            console.log(i);
+        },0);
+     * }let i = 2
+     *  setTimeout(function(){
+            console.log(i);
+        },0);
+     * }
+     * 
+    */
+
+    // {
+    //     var i = 9;
+
+    // }
+
+    // {
+    //     let i = 0
+    //     console.log(i)
+    // h[0].onclick = function(){
+    //     h[0].style.color = 'red'
+    // }
+    // // }
+
+    // {
+    //     let i = 1
+    //     console.log(i)
+    // }
+    // {
+    //     let i = 2
+    //     console.log(i)
+    // }
+        function ssa(index){
+            let index = index; // 报错 
+            //在函数体中 函数体不能声明函数名 
+            // 也不能申明参数名]
+            // 且 不能let变量名 不能重名 
+        }
+</script>
+
+</html>

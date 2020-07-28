@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    let obj = {
+        name: 'sage',  //静态属性 
+        get a() {
+            console.log('执行了get')
+            // this.name = newVal 
+            return this.name
+        },
+        set a(Val) {
+            console.log('执行了set')
+            this.name = Val
+        }
+    }
+    console.log(obj.a);//单独 写一个obj.a 触发的是 get
+    // 当 obj.a = '1212121'  这时候就是两个都触发了
+
+    // 在es6中 在对象中 有一直存在的两个方法set和get
+</script>
+
+</html>

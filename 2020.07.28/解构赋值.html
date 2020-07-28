@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    let obj = {
+        name: 'asdasd',
+        age: 22
+    }
+    let { name, age } = obj
+    console.log(name, age)
+
+    let [one, two, [a, b, c]] = [1, 2, [1, 2, [5]]]
+    console.log(one, two, a, b, c);
+
+    // 以前，为变量赋值，只能直接指定值。
+    // ES6 允许写成下面这样。
+    let [a, b, c] = [1, 2, 3];  //上面代码表示，可以从数组中提取值，按照对应位置，对变量赋值。
+
+    let [head, ...tail] = [1, 2, 3, 4];
+    //head // 1
+    // tail // [2, 3, 4]
+
+    // 如果结构不成功 就是undefined
+    let [x, y, ...z] = ['a'];
+    x // "a"
+    y // undefined
+    z // []
+</script>
