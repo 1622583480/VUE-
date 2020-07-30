@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // 代理劫持  做对象属性的数据劫持 
+    // 只不过是代理的方式 
+
+    var obj = {
+        x: 1,
+        y: 2,
+        list: [1, 2, 4]
+    }
+    // 劫持的是obj
+    // 创建代理对象
+    var pxy = new Proxy(obj, {
+        // 参数1 是被代理的对象
+        // 参数2 是被监听的属性 
+        // 参数3 代理对象 pxy
+        get: function (target, propkey, receiver) {
+            console.log('触发了get')
+            console.log(target) // obj
+            console.log(propkey); // 被代理的属性 
+            return target[propkey] //+ '加工处理'
+        },
+        set: function (target, propkey, value, receiver) {
+            console.log('触发set');
+            console.log(target);   // 被代理对象
+            console.log(propkey); // 被监听对象属性
+            console.log(value); // 被替换的值
+            console.log(receiver); // 代理的对象
+            target[propkey] = value;
+
+            // 这里target是被代理的对象也就是obj
+            // propkey 是obj的属性名 [] 可以指向对象下的值 
+            // value 是 传过来的值 
+            // 所以这里的 target[propkey] = value; 就是普通的对象赋值
+
+        }
+    });
+
+    // var kehu = Object.create(pxy); 
+    // 代理对象 对接 
+    // console.log(pxy.list)
+    //  consoel.log(kehu); //如果没有给指定值
+    // 那么默认触发所有的属性 
+    // console.log(kehu.x); //指定某个属性 
+    // 触发一次代理
+
+
+
+    pxy.list = new Proxy(pxy.list,{
+        get:function(target, index, receiver){
+            console.log(target);
+            console.log(index);
+            console.log(receiver);
+            return target[index]
+        },
+        set:function(target, index, value, receiver){
+            console.log(target);
+            console.log(index);
+            console.log(value);
+            console.log(receiver);
+            target[index] = value;
+        }
+    })
+    
+    pxy.list[0] = 1231231231231231231231 //无法找到索引值
+  //  pxy.list //无法找到索引值'
+    // 解决方案就是 代理下面的属性值
+
+</script>
+
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // .then 代表执行成功后的代码
+    // function two(res, callback) {
+    //     console.log("我搜到信号了", res);
+    //     console.log("开始第二件事 -- 包饺子");
+    //     callback("我是老二：给你 饺子");
+    // }
+
+    // function one(callback) {
+    //     console.log("开始第一件事");
+    //     callback("我是老大我完成了--面粉", three);
+    // }
+
+    // function three(res) {
+    //     console.log("我已经收到；信号" + res);
+    //     console.log("开始第三件事，下锅煮");
+    // }
+
+    // one(two);
+
+
+    //  参数1 :resolve 代表成功
+    //  参数2 : reject 代表失败  
+    // var p = new Promise((resolve, reject) => {
+    //     console.log('异步任务开始了')
+    //     if (true) {
+    //         console.log('------------代办任务即将改变状态了');
+    //         resolve('告诉外界，任务成功完成了');
+    //         // 这里告诉外界 可以理解为p里面有一个属性 
+    //         // 用于存储 resolve里面抛出的内容
+    //     } else {
+    //         reject('任务失败了');
+    //         // 这里也是抛出 只不过是抛出一个异常表示这里错误
+
+    //     }
+    // })
+    // p = {
+    //     resolve: '告诉外界，任务成功完成了',
+    //     reject: '任务失败了'
+    // }
+
+
+    // .then 返回一个新的promise 
+    // 参数1 是resolve执行的函数  (处理成功的函数)
+    // 参数2 是 reject执行的函数 (处理失败的函数)
+
+    // catch 是捕获错误并处理错误的函数 
+    // p.then(res => { // 这里res 就是上一次 resolve抛出的内容
+
+    //     console.log('接收promise 信号', res);
+    //     console.log('我是外界，正在处理成功后事项。')
+    //     if (true) {
+    //         console.log('后续问题为已经处理完毕 可以开始下一个任务了');
+
+    //     }
+    // }).catch(err => {
+    //     console.log('我是外界；我捕获错误 正在解决错误');
+
+    // });
+
+    function start(test) {
+        return new Promise((arr, res) => {
+            console.log(`任务${test}开始了`);
+            if (true) {
+                arr('任务开始了')
+            } else {
+            }
+        })
+    }
+    start('第一件事').then(res => {
+        console.log('处理第一件事', res)
+        if (true) {
+            return start('第二件事')
+        }
+    }).then(res => {
+        console.log('开始第二件事', res);
+        if (true) {
+            console.log('处理第二件事');
+            return start('第三件事')
+        }
+    }).then(res => {
+        console.log('开始第三件事', res);
+        if (true) {
+            console.log('处理第三件事');
+            return start('第四件事')
+        }
+    });
+</script>
+
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+</body>
+<script>
+    var obj = {
+        // 通过get` set 做静态属性 num的数据劫持 
+        num:9
+    }
+    
+    // var res = obj.num
+    // obj._num = 'dddd';
+
+    // obj.num 
+    // obj.num = 123
+    let _num = obj.num; // 需要一个_num 作为中间存储值 
+    // 避免get set 死循环
+
+    // 参数1 对象 
+    // 参数2 被监听的属性
+    // 参数3 options {getter setter}
+    Object.defineProperty(obj,'num',{
+        // 数据劫持:获取数据 还没有渠道 做拦截处理
+        get(){
+            console.log('走了get');
+            return _num; // 释放 最终获取数据 
+            // 拦截处理完毕 ,最终获取数据
+        },
+        // 数据劫持 修改数据 在修改之前拦截 
+        set(val){
+            // 拦截 
+            console.log('走了set')
+            console.log(val);
+            // 修改 
+            _num = val;  
+            // 没有修改: 拦截 num 
+        }
+    });
+    obj.num = 16; // set
+</script>
+
+</html>
