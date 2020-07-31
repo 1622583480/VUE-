@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+
+        <input type="checkbox" v-model="checked" value="xhxhxhx">xwj
+        <input type="checkbox" v-model="checked" value="wtwtwtw">wyh
+        <div v-for="item in -">{{item}}</div>
+        <!-- 怎么知道用户uoqu复选框里面的内容 -->
+
+        <!-- v-model 绑定所有用户选中内容的集合【数组】 -->
+        <!-- checked数组存放 遍历拿出来-->
+
+
+        <!-- 单选框 -->
+        <input type="checkbox" id="checkbox" v-model="che">Are you OK?
+        <label for="checkbox">{{che}}</label>
+    </div>
+</body>
+<script src="./vue.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app', 
+        data: {
+            checked:[],
+            che:"",  // 保存用户 输入的内容
+        },
+        methods:{
+            
+        }
+    })
+</script>
+</html>

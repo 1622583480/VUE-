@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <div class="box" @click="clickHandle('aa',$event)"></div>
+        <!-- 如果你绑定的函数没有形参 那么就不需要加括号 -->
+        <!-- 当一个事件有参数你还需要参数的时候  -->
+        <!--还想用要事件对象的时候 那么你就可以传一个$event
+        作为手动传入的事件对象 -->
+        <div class="box" @click.once="clickHandle('aa',$event)"></div>
+        <!-- once修饰符 只能执行一次 -->
+    </div>
+</body>
+<script src="./vue.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+
+        },
+        methods: {
+            clickHandle(a, b) {
+                console.log(a, b);
+            }
+        }
+    })
+</script>
+
+</html>

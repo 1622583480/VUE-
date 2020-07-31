@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="(item,index) in list">
+                <!-- 遍历数组 -->
+                <!--  参数1 item数组的值
+                    参数2  index索引的值 -->
+                <!--list 要遍历的数组 -->
+                {{item}}:{{index}}
+            </li>
+        </ul>
+        <ul>
+            <li v-for="(i,x) in person">
+                {{x}}:{{i}}
+                <!-- 这个就反过来了 参数2是value值 -->
+                <!-- 参数1是key值 -->
+            </li>
+        </ul>
+        <dd>
+            <dl v-for="(item,index) in student">
+                姓名:{{item.name}}
+                <!-- 年龄:{{item,age}} -->
+            </dl>
+        </dd>
+    </div>
+</body>
+<script src="./vue.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            list: ['1qweqweq', 'qweqweqwe2', 'ssssss'],
+            person: {
+                name: '韩建莉',
+                age: 18,
+                dec: '淡黄长裙,浓密乌黑亮丽头发'
+            },
+            student: [{
+                name: '老王',
+                age: 18
+            },{
+                name:'aaa',
+                age:1212
+            },{
+                name:'asdad',
+                age:45
+            }
+            ]
+        },
+        methods: {
+
+        }
+    })
+</script>
+
+</html>

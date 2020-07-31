@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .AAA{
+        background-color: red;
+    }
+    .BBB{
+        color:#fff
+    }
+</style>
+<body>
+    <div id="app">
+        <!-- Vue 动态给Html属性插入值 -->
+
+        <!-- 如果你想 加了冒号之后 在使用字符串 就需要 " 'sdad' " 在里面用''' -->
+        <img :class="className"  v-bind:src="imgsrc" :alt="info"> 
+        
+        <!-- 可以用v-bind:attr=""这个方法把h5标签属性
+        变成html动态值 -->
+        <!-- 如果不用v-bind那么imgsrc仅仅就是个字符串 -->
+        <!-- 简写方法 :attr="变量" 也就是直接加冒号--> 
+
+        <!-- 属性插值 渲染字符串  -->
+        <input type="text" :value="val + '我是插入的字符串' ">
+
+        <!-- 这里拼接字符串使用 变量 + '要被拼接的值'
+        Vue在html中的变量可以是data中的属性值,methods中的函数............
+        -->
+    </div>
+</body>
+<script src="./vue.js"></script>
+<script>
+
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+            imgsrc: '我是一个图片的地址',
+            info:"Hello???? img没加载",
+            className:'AAA BBB',
+            val:'我是变量的值',
+        },
+        methods: {
+
+        }
+    });
+    // 在Vue中 指令是以v-开头 后面跟着类型
+    // 可以由Vue完成 功能 
+    // 语法糖 就是 把一大段代码片段封装 
+    // 然后以比较简单的代码时实现 方便程序员开发 
+    // (语法糖是可以吃的)
+    // 例如Vue的指令 模板语法 这些都是语法糖 
+
+</script>
+
+</html>

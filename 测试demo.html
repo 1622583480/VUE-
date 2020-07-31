@@ -8,10 +8,19 @@
 </head>
 
 <body>
+    <dic id="app">
 
+
+        <div v-for="x in list">{{x}}</div>
+        <button @click='add'>Hello World</button>
+        <button @click='delet'>Hello World</button>
+
+
+    </dic>
 </body>
 
 </html>
+<script src="./2020.07.30 Vue.js/vue.js"></script>
 <script>
     // var num = 1212121;
     // function A() {
@@ -22,10 +31,24 @@
     // }
     // A();
 
-    // console.log(num);
-    // setInterval
-    let s = new Set();
-    s.add([1]);
-    s.add([1]);
-     console.log(s.size,s);
+    // // console.log(num);
+    // // setInterval
+    // let s = new Set();
+    // s.add([1]);
+    // s.add([1]);
+    //  console.log(s.size,s);
+    var app = new Vue({
+        el:'#app',
+        data:{
+            list:[1,2,3,4,5,6,7,8,9,0]
+        },
+        methods:{
+            add(){
+                this.list.push('哈哈')
+            },
+            delet(){
+                this.list.splice(0,1)
+            }
+        }
+    })
 </script>

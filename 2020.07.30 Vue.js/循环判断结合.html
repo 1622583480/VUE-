@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <h1 v-if="false"></h1>
+        <!--直接用false或者true 是有用的 -->
+
+        <dd v-for="(item,index) in list" v-if="item.age>20">
+            <!-- 可以用v-if来控制循环次数 -->
+            姓名:{{item.name}} 年龄:{{item.age}}
+        </dd>
+        <!-- 标签内部的创建的变量也是有作用域 的 
+            比如item和index 仅仅在本标签和比标签内容使用 
+        -->
+
+
+        <!-- 如何增加 index的作用域 不会影响的html1的结构
+ -->
+        <div>
+            <!-- 注意 trmplate vue-cli中不能使用了 -->
+            <template v-for="(item,index) in arr">
+                <!-- 增加元素的作用域 不会影响html结构 -->
+                <span>{{index}}</span>
+                <span>{{item}}</span>
+            </template>
+        </div>
+    </div>
+</body>
+<script src="./vue.js"></script>
+<script>
+    var app = new Vue({
+        el: "#app",
+        // <!-- 在对象中声明的变量 ,作用域为整个app模板 -->
+        // - data 
+        // - methods 
+        // - computed
+        // - watch 都可在整个模板内使用 
+        data: {
+            list: [
+                { name: '1212', age: 21 },
+                { name: 'qwqw', age: 3 },
+                { name: 'opop', age: 79 }
+            ],
+            arr: [1, 2, 3, 4, 5, 6, 7, 8, 9, 9, 0]
+        }
+    })
+</script>
+
+</html>

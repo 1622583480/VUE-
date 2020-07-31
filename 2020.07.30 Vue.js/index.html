@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function foo (callBack) {
+            callBack(function(callBack){
+                callBack()
+                console.log('sfsfdfdsf')
+            })
+        }
+        foo(function(callBack){
+            callBack(function(callBack){
+                console.log('sss')
+            })
+        });
+    </script>
+</body>
+</html>

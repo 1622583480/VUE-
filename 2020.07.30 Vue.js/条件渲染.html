@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+    <h1 v-if="flag">AAAA</h1>
+    <h2 v-else="flag">BBBB</h2>
+    <!-- v-if判断 如果是false就隐藏 true就显示
+    v-else 就是反过来的 false 显示 true隐藏
+    -->
+    <!-- 注意点: 隐藏之后在html标签里面都消失了 -->
+        <button @click="changeH2">切换</button>
+
+        <div>
+            <p v-if="conut==1">你好1</p>
+            <p v-if="conut==2">你好2</p>
+            <p v-if="conut==3">你好3</p>
+            <p v-if="conut==4">你好4</p>
+            <p v-if="conut==5">你好5</p>
+        </div>  
+        <button @click='changeP'>点击增加</button>
+    </div>
+    <!-- v-if="变量"表达式 -->
+    <!-- ""里面的内容 最终用的true false -->
+    <!-- true 创建html标签 -->
+    <!-- false销毁html标签  -->
+    <!-- 用注释标签代替 -->
+
+
+
+    <!-- 实现 if elseif elseif elseif else -->
+</body>
+<script src="./vue.js"></script>
+<script>
+    var app = new Vue({
+        el:'#app',
+        data:{
+            flag:true,
+            conut:1
+        },
+        methods:{
+            changeH2:function(){
+                this.flag = !this.flag;
+                // 这里的this由于触发都是Vue对象触发的所以全部指向的都是对应data里面的flsg
+            },
+            changeP:function(){
+                ++this.conut;
+                if(this.conut == 6){
+                    this.conut =1
+                }
+
+            }
+        }
+    });
+    
+</script>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <form>
+            <input type="text" :value="ipt" @input="input" @keydown.enter.prevent="keyHandle">
+            <button @click.prevent.stop="submit">提交</button>
+            <!-- 修饰符 阻止浏览器的默认事件 -->
+            <!-- 阻止事件冒泡 stop -->
+            <!-- enter 只有按下enter键才触发 -->
+            <!-- 表单默认事件也会触发一次 
+                    所以input按钮也会触发一次
+            -->
+
+        </form>
+
+
+
+        <div>我是内容</div>
+    </div>
+
+</body>
+<!-- 在Vue中 v-on:事件名="事件处理函数"
+    简写@事件名="事件处理函数"
+    特殊情况 
+    1.阻止浏览器默认行为;事件冒泡 指定按键... 修饰符
+
+    @事件名.修饰符 = '事件处理函数'
+-->
+<script src="./vue.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            ipt: '',   // inpu t输入的内容  
+            // 需要双向绑定 或者input绑定事件
+        },
+        methods: {
+            submit: function () {
+                // e.preventDefault()
+                console.log(this.ipt);
+
+            },
+            input: function (e) {
+                // console.log(e.target);  //获取用户输入的内容
+                this.ipt = e.target.value  //赋值给ipt
+                // 这里处理操作dom
+            },
+            keyHandle() {
+                console.log(this.ipt)
+            },
+            aa(e) {
+                // self 修饰符 精准触发 
+                // 有时候触发的不是div标签本身
+                // 有时候点文字会有fons标签  
+                // 有时候触发不是从元素
+                console.log(e.target)
+
+            }
+        }
+    });
+</script>
+
+</html>

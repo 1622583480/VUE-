@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .box {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+    }
+
+</style>
+<body>
+    <div id="app">
+        <button @click="toggle">{{txt}}</button>
+        <div :class="{box:flag}" v-show="flag"></div>
+        <!-- flag等于true的时候 给这个div添加一个类名叫box -->
+        <!-- 反之亦然 -->
+    </div>
+</body>
+<script src="./vue.js"></script>
+<script>
+    // Vue是数据驱动视图
+
+
+    var app = new Vue({
+        el: "#app",
+        data: {
+            txt: '隐藏',
+            flag:true
+        },
+        methods: {
+            toggle:function(){
+                console.log('1111111111111');
+                this.flag = !this.flag
+                if(this.flag){
+                    this.txt = "隐藏"
+                }else{
+                    this.txt = "显示"
+                }
+            }
+        }
+    })
+</script>
+
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <div :class="active"></div>
+        <div v-html="active"></div>
+        <!-- 这里要注意 用v-html插入渲染的html标签
+        所有指令都不会对插入的html元素生效  -->
+
+        <!-- 指令失效之后该咋办 如何再去操作Dom -->
+        <!-- 那就直接去Vue中操作Dom不用指令 -->
+
+        <!-- 如何在Vue当中直接使用Dom  -->
+        <!-- 在method中直接操作Dom 是基本没有错误的 -->
+
+        <!-- this.$ref (未讲,不适合当前讲) -->
+
+        <!-- 问题:vue中 有几种最直接操作dom的元素 -->
+    </div>
+
+</body>
+<script src="./vue.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            tmp: `<div :class="active" name='aa'></div>`,
+            active: 'aa'
+        },
+        methods(){
+            console.log('aaaa');
+            var div = document.querySelector('div[name=aa]')
+            console.log(div)
+            div.className = this.data.active
+        }   
+    });
+</script>
+
+</html>

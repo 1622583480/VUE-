@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <h1 v-show="false">你看不到我</h1>
+        <!-- 就是设置了display:none -->
+        <h1 v-if="false">你看不到我</h1>
+        <!-- 他俩区别就是 v-if是删除节点 
+        v-show是display:none -->
+        <!-- 如果元素显示隐藏比较频繁 就用v-show -->
+        <!-- v-if来回操作dom比较影响性能  -->
+        <!-- 一般来说 在进入新的页面去调公共样式所以说会用v-if -->
+        <!-- 面试题 -->
+
+
+    </div>
+</body>
+<script src="./vue.js"></script>
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+
+        }
+    })
+</script>
+
+</html>

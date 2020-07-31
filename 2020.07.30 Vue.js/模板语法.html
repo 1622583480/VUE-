@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{msg}}</h1>  <!-- 双大括号代表里面的内容是 msg -->
+        <h1>{{1+1}}</h1>  <!-- 模板语法当中可以写表达式 -->
+        <h1>{{flag ? '老王头老漂亮了':'老王头老帅了'}}</h1>
+        <!-- 模板字符串里面可以进行计算 -->
+        <h1>{{init()}}</h1>  <!-- 还可以写函数执行  -->
+        <h2>{{'boy next door'}}</h2>  <!-- 当然也可直接写字符串 不过要加引号 -->
+        <div v-html="text"></div>  <!-- 在html里面不能和直接插入html标签 -->
+        <!-- 但是可以用v-html指令了插入  -->
+    </div>
+</body>
+<script src="./vue.js"></script>
+<script>
+    var app = new Vue({
+        el:'#app',  //指定Vue对象的根模板  
+        data:{ //整个 html标签中的数组都在html中 
+            // 在我el选中某个根元素的时候 里面的所有标签 已经被选中了;
+            msg:'Hello World', //根元素里面的 msg就是上面的属性 
+            flag:true,
+            text:`<em>我是一个html标签</em>`
+        },
+        methods:{ // 这里写定义的函数 
+            init(){
+                return 'Hello Vue!'
+            }
+        }
+    });  //实例化Vue对象 
+
+
+</script>
+
+</html>

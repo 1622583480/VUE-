@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- <h3 v-for="x in 5">我是内容{{x}}</h3>
+        <h3 v-for="x in conut">我是内容{{x}}</h3> -->
+        <!-- 给添加v-for的标签复制5份 -->
+
+        <!-- 9 X 9乘法表 -->
+        <div v-for="i in 9">
+            <span v-for="x in i">{{x + "X" + i + "=" + x*i+' '}}</span>
+        </div>
+    </div>
+</body>
+<script src="./vue.js"></script>
+<script>
+    var app = new Vue({
+        el:"#app",
+        data:{
+            conut:3
+        },
+
+    })
+</script>
+</html>

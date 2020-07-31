@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" @input.prvent.enter="input" v-model="Val" @keydown.enter="add">
+        <button @click.enter='add'>增加</button>
+        <template>
+            <div v-if="true" v-for="(item,index) in list" @click="delet(index,$event)">{{item}}</div>
+        </template>
+    </div>
+</body>
+<script src="./vue.js"></script>
+<script>
+    var arr = new Vue({
+        el: '#app',
+        data: {
+            Val: '',
+            list: []
+        },
+        methods: {
+            input() {
+
+            },
+            add() {
+                this.list.push(this.Val);
+                this.Val = ""
+                console.log(this.list)
+            },
+            delet(a, e) {
+                console.log(a)
+                this.list.splice(a, 1)
+            }
+        }
+    });
+
+</script>
+
+</html>

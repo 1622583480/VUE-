@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <button @click="cut_back">-</button>
+        <img :src="imgs[num]" alt="">
+        <button @click="increase">+</button>
+    </div>
+</body>
+<script src="./vue.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            imgs: ['./素材jpg/下载.jpg', './素材jpg/下载 (1).jpg', './素材jpg/下载 (2).jpg', './素材jpg/下载 (3).jpg','./素材jpg/下载 (4).jpg',],
+            num: 0
+        },
+        methods: {
+            increase() {
+                if (this.num >= 4) {
+                    this.num = 0
+                } else {
+                    ++this.num
+                }
+            },
+            cut_back() {
+                if (this.num <= 0) {
+                    this.num = 4
+                } else {
+                    --this.num
+                }
+            }
+        }
+    });
+</script>
+
+</html>

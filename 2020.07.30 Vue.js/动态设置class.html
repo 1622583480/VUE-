@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+
+        <span :class="{active:isActive,'tetx-danger':hasEror}"></span>
+        <span class="active text_danger"></span>
+        <span :class="classObj"></span>
+        <!-- 这里常用添加的是一个对象 -->
+        <!-- 所以可以不用{} 在data里面定义一个对象 
+        赋值为第一个的格式 -->
+        <span :class="[a,b,c,d,e,f]"></span>
+        <span :calss="arr"></span>
+        <span :class="addClass{}"></span>
+    </div>
+</body>
+<script src="./vue.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            arr: ['a', 'v', "ty", "cosn"],
+            isActive: false,
+            hasEror: false,
+            classObj: {
+                active: true,
+                'text-danger': true
+            }
+        },
+        methods: {
+            addClass() {
+                return {
+                    active: this.active,
+                    
+                }
+            }
+        }
+    });
+
+    // var obj = {
+
+    // }
+    // {active:isActive,
+    // 'tetx-danger':hasEror
+    // }
+</script>
+
+</html>
