@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <h1>WDNMD</h1>
+    </div>
+</body>
+<script src="../vue.js"></script>
+<script>
+    var app = new Vue({
+        // template:``,
+        data: {
+            msg: 'WDNMD'
+        },
+        beforeCreate: function () {
+            // 可以做loading
+            console.log("初始化之前");
+        },
+        created() {
+            //这里一般做页面初始化处理 初始化获取数据
+            console.log("页面初始化");
+
+        },
+        beforeMount() {
+            console.log("数据渲染前");
+
+        },
+        mounted() {
+            // 这里可以访问DOM
+            // 在这里操作DOM
+            // 只有这里和updated可以直接操作dom
+            console.log("数据渲染完毕");
+
+        },
+        beforeUpdate() {
+            console.log("数据更新前");
+
+        },
+        updated() {
+            // data里面数据更新的时候 才会触发这个
+            console.log("数据更新完毕");
+        },
+        distory(){
+            // 这里情况所有的timer
+            // 销毁的时候; 触发
+        }
+
+    });
+    app.$mount('#app'); //和el一样 都是指定根元素 
+
+</script>
+
+</html>

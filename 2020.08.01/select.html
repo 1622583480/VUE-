@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 实现用户选择的 select option 与selectCity绑定 -->
+    <div id="app">
+        <select name="city" id="city" @change="changeCity" v-model="selectCity">
+            <option v-for='(item,index) in city' :value="item">{{item}}</option>
+        </select>
+
+    </div>
+</body>
+<script src="../vue.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            city: [
+                '南京', '无锡', '苏州', '常州'
+            ],
+            selectCity:'南京'  //表示用户输入的哪一个内容
+        },
+        methods: {
+            changeCity(){   
+                console.log(this.selectCity)
+            }
+
+        }
+    })
+</script>
+
+</html>

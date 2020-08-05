@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <input type="radio" value="One" v-model="radioVal">
+        <label for="one">One</label>
+        <input type="radio" value="Two" v-model="radioVal">
+        <label for="two">Two</label>
+        <input type="radio" value="Three" v-model="radioVal">
+        <label for="Three">Three</label>
+        <input type="radio" value="Four" v-model="radioVal">
+        <label for="Four">Four</label>
+        <input type="radio" value="Five" v-model="radioVal">
+        <label for="Five">Five</label>
+        <input type="radio" value="Six" v-model="radioVal">
+        <label for="Six">Six</label>
+        <!-- <div>{{radioVal}}</div> -->
+        <div><button @click="getRadio">获取你选择的是啥</button></div>
+        <!-- 实时获取变量的值 -->
+        <!-- 
+            单选：
+            1.问题：如何获取用户选中了哪个单选框;以及选择的内容是什么
+            2.问题：哪些属性是必须要写的 
+            注意点：静态Value和动态:Value的区别
+                    千万别被双向绑定给迷惑住
+            -->
+    </div>
+</body>
+<script src="../vue.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            radioVal: 'One'
+            // 每次更新的遍历
+        },
+        methods: {
+            getRadio() {
+                alert(this.radioVal);
+            }
+        }
+    })
+</script>
+<!-- 
+    vue demo 步骤
+    1 确定html 解构
+    2 导入 vue 化vue 对象
+    3 将html 内容 变为 data 中数据
+    4 将data 中数据及逆行遍历徐然  --- >完成也面的初始化效果
+    5 拆分用户的行为 ；分别实现功能。
+        问题：如何通过data 中  实现效果交互
+    6 变量或者数据不够，创建变量；全局 data 非全局 函数里面  
+-->
+</html>
