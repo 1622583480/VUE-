@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+</body>
+<script src="../vue.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            student: {
+                name: '周超'
+            }
+        },
+        watch: {
+            student:{
+                deep:true,
+                handler: function(to){
+                    console.olg(to);
+                    console.log(to.age);
+                }
+            },
+            // 监听对象下属性
+            'student.name':function(to){
+                //对象下的name属性发生变化触发这个函数
+                console.log('监听了',to)
+            }
+        },
+        created() {
+            this.student.name = '王宇航'
+        },
+    })
+</script>
+
+</html>

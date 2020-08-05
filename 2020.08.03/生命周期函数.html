@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+</body>
+<script src="../vue.js"></script>
+<script>
+    /**
+        init的时候 el可以找到id=app的元素 
+        这时候判断不到tempalate
+        没有 报错 cannot find element '#app'
+
+        2. vue判断是否有 template 
+        template里面也要有根元素 #app
+        将template作为vue的模板 被rander渲染 
+
+        3. 如果没有template属性那么这个就是vue模板 
+        // 这里是没有数据的响应式绑定的  {{msg}} 是一个普通字符串 
+        将el指定的根模板编译到template中 并通过rander渲染到页面上 
+
+    */
+    var app = new Vue({
+        el: '#app',
+        template: `<div id="app">
+        <h1>{{msg}}</h1>
+
+        <button @click="msgChange">更改</button>
+        <button @click="distoryHandle">销毁Vu</button>
+
+        </div>`,
+        data: {
+            // data表示页面中的所有数据 
+            // 注意: 不仅仅是date一个 
+            msg: 'Hello World'
+        },
+        methods: {
+            msgChange() {
+                this.msg = "Hello JavaScript"
+            },
+            distoryHandle() {
+                this.$Destroyed();
+                // 销毁之后 Vue所有的事件绑定和双向绑定都失效了 
+            }
+
+        },
+        Destroyed() {
+    
+        }   
+    })
+</script>
+<!-- 
+    rander
+    响应式数据
+    虚拟dom
+
+    编译需要时间
+
+    可能存在一下问题
+        1. 数据更新了 视图没更新 
+        2. 有一些操作是 dom渲染以后再进行的, 问题没有dom先触发了 
+
+-->
+
+
+
+</html>

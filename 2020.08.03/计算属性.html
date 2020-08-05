@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{ reverseStr() }}</h1>
+
+        <!-- 注意这不是一个函数仅仅就是一个计算属性  -->
+        <!-- 当我在第一次执行的时候  -->
+        <!-- reverseStr1 就已经保存的retrun的返回值  -->
+        <!-- 当函数内依赖项 会发生变化的时候 比如里面的 [message的值]发生变化的时候  -->
+        <!-- 这里会有缓存的作用  -->
+        <!-- 才会去再次执行这个函数接收返回值   -->
+        <h2>{{ reverseStr1 }} </h2>
+        <h2>{{ reverseStr1 }} </h2>
+        <h2>{{ reverseStr1 }} </h2>
+        <h2>{{ reverseStr1 }} </h2>
+
+    </div>
+</body>
+<script src="../vue.js"></script>
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+            message: "Hello World",
+            x: 0
+        },
+        methods: {
+            reverseStr() {
+                // console.log('执行',++this.x);
+                // 注意: 计算属性 不能直接修改值 
+                return this.message.split('').reverse().join('')
+            }
+        },
+        computed: {
+            // 起到缓存的效果 
+            // 只要 下面函数内 依赖data里面的数据 发生变化的时候 才会去再次执行 
+            //  这里应用场景就是大量计算 
+            // 渲染函数返回值 
+            // 这里仅仅只是用了代码实现了临时存储 ]
+            // 避免程序的重复执行 
+            // 计算属性仅仅存储的是当前的状态 
+            reverseStr1: function () {
+                // reverseStr1 不是一个函数 而是一个计算属性 
+                /**
+                 * computed仅仅就是Vue里面的计算属性 
+                 * 值是一个对象 
+                 * key就是一个普通的属性 不是函数 
+                 * key赋值为 后面return的返回值 
+                 * 
+                 * 1. 函数的执行
+                 *  使用了 计算属性 
+                 *  再次执行 这个函数中用到的data树发生变化的时候会再次执行执行
+                 *   
+                */
+                console.log('计算属性')
+                return this.message.split('').reverse().join('')
+            }
+        }
+    })
+</script>
+
+</html>

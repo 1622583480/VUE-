@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <h1 ref="H1">Hello World</h1>
+        <div ref="MSG">{{msg}}</div>
+    </div>
+</body>
+<script src="../vue.js"></script>
+<script>
+    var app = new Vue({
+        el:'#app',
+        data:{
+            msg:'asdasdasda'
+        },
+        mounted() {
+            let {H1,MSG} = this.$refs
+            console.log(H1,MSG)
+            let h = getComputedStyle(H1,null)['height']
+            let q = getComputedStyle(MSG,null)['height']
+
+            console.log(h,q)
+        },  
+        methods:{
+            getDom(){
+
+            }
+        },
+
+    })
+</script>
+
+</html>

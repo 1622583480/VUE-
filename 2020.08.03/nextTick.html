@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <h1 @click="title">{{msg}}</h1>
+    </div>
+</body>
+<script src="../vue.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            msg: 'Hello',
+            list: []
+        },
+        methods: {
+
+            title() {
+                setTimeout(() => {
+                    this.msg = 'World'
+                }, 1000) 
+                //  $next Tick msg :等待dom渲染完毕后在执行回调函数 
+                this.$nextTick(() => {
+                });
+                console.log('等dom渲染完毕后执行');
+                this.doSomethingElse()
+            },
+            doSomethingElse() {
+                console.log(this.msg)
+            }
+        }
+    });
+</script>
+
+</html>
+
+<!-- 解决的问题 
+    数据更新了:不能获取dom元素 
+
+-->

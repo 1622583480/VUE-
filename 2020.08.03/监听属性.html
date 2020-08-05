@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div  id="app">
+        <h1>{{msg}}</h1>
+        <button @click="destoryHandle">删除Vue</button>
+    </div>
+</body>
+<script src="../vue.js"></script>
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+            msg: 'aa',
+            time: null,
+
+        },
+        methods: {
+            destoryHandle() {
+                this.$destroy();
+                // 这个就是一个Vue的内置APi
+                // 就相当于调用 destroyed()来销毁Vue
+            }
+        },
+        destroyed() {
+            clearInterval(this.time)
+        },
+        created() {
+            this.time = setInterval(() => {
+                this.msg += "1"
+            }, 1000)
+        },
+        watch: {
+            // 实时监听data里面的数据 
+            // key值是 data当中的一个属性 
+            // 当那个属性发生变化的时候 就会触发后面的函数 
+            // to代表变化之前的值 from代表变化之后的值
+            msg: function (to, from) {
+                // 这里有一些应用场景 如果需要让某一个值让另一个值发生变化 
+
+                // 这里有俩参数 参数1代表变化之前的值 from代表变化之后的值
+                // 所以说这里的val也是变化之前的值  
+                console.log('被监听的数据发生了变化')
+                console.log(from);
+                console.log(to);
+            }
+        }
+    })
+</script>
+
+</html>

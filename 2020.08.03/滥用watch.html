@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{z}}</h1>
+    </div>
+</body>
+<script src="../vue.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            x: 1,
+            y: 2,
+            z: 3,
+            sum: 0,
+        },
+        // watch 监听属性可以用来监听Vue中某一个值的变化过程 
+        // 当某一个响应式的数据发生变化的时候就会触发的函数 
+        // 每次只能监听一个响应式数据 
+
+        // computed 计算属性 函数方法体内部 用到的依赖的响应式数据发生
+        // 变化的时候 就会触发函数
+        // 注意:一个计算属性中函数体当中可以依赖多个响应式数据 
+        // 这里的依赖项 一般来说是某个变量 
+
+        //从执行程序 computed可以依赖多个 watch执行  多个数据 多个函数
+
+        //对于某一个响应式数据 需要随着多个响应式数据的变化而变化 
+        // 应该使用computed增加执行的对应的程序
+
+        watch: {
+            'x': function (val,A) {
+                
+                console.log(this.x, '----------');
+                console.log(val,A);
+                
+
+                this.z = val + this.y
+            },
+            // y: function (val) {
+            //     // console.log(val, '++++++++++++++++')
+            //     this.z = val + this.x
+            // }
+        },
+        computed: {
+            sum:function () {
+                this.z = this.x + this.y
+                return this.z
+            }
+        },
+        /**
+            computed 和methods的区别 ====> 缓存
+
+            computed和 watch的区别 ====> 依赖 响应式数据的个数
+            computed没有wated灵敏
+        */
+        created() {
+            // this.x = 3;
+            setInterval(() => {
+                this.x += 1
+                // this.y += 1
+
+            }, 1000)
+        },
+    })
+</script>
+
+</html>

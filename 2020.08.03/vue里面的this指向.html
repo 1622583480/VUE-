@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        1: this.xxxx去获取vue下的所有的内容
+    </div>
+</body>
+<script src="../vue.js"></script>
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+
+        },
+        methofd: {
+            a(inner) {
+                this.b(inner);
+                //什么情况下不是vue
+
+                // 注意所有的异步程序 
+                // 里面的函数可能指向window 
+            },
+            b(inner) {
+                console.log(inner)
+
+            },
+        },
+        created() {
+            // 页面初始化的时候 执行的函数 
+            this.a('WDNMD')
+        }   
+    })
+</script>
+
+</html>

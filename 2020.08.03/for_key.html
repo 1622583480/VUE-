@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+<div id="app">
+    <div v-for="item in list" key="item.id">
+        <p>{{item.name}}</p>
+        <p>{{item.age}}</p>
+    </div>
+</div>
+</body>
+<script src="../vue.js"></script>
+<script>
+    /**
+        一个模板 循环反复使用一个模板 
+        需要一个内容告诉vue虽然使用的是一个模板
+        但是数据是不同的 数据不同 虚拟dom提高效率 
+
+    */
+    var app = new Vue({
+        el: '#app',
+        data: {
+            list:[
+                {name:'wyh',age:21212,id:1},
+                {name:'zxklja',age:22,id:2},
+                {name:'xcjsn',age:12,id:3}]
+        },
+        methods: {
+
+        }
+    })
+</script>
+<!-- 
+    在编译之前 
+    1. 获取模板 
+    2. 将模板变成虚拟dom
+    3. 将虚拟dom 变为模板进行编译 
+
+    vue更新虚拟dom将新模板和旧模板进行比较 
+-->
+
+</html>

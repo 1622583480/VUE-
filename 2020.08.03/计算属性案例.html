@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .box {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+        transition: all 0.32s;
+    }
+</style>
+
+<body>
+    <div id="app">
+        <div class="box" :style="{'margin-left':M_left +'px'}">
+
+        </div>
+        <button @click="move">move</button>
+        <button @click="watch">watch</button>
+    </div>
+</body>
+<script src="../vue.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            M_left: 0,
+            num: 1,
+            styleObj:{
+            }
+        },
+        methods: {
+            move() {
+                this.num++
+            },
+            watch() {
+                this.M_left += 20
+            },
+        },
+        watch: {
+            num:function(val){
+                this.M_left = val * this.M_left
+            }
+        },
+        
+        // computed: {
+        //     styleObj:function(){
+        //         let num = this.num;
+        //         let M_left = this.M_left;
+        //         this.styleObj = {
+        //             marginLeft:num*M_left +"px",
+        //         }
+        //     }
+        // },
+    });
+
+</script>
+
+</html>
