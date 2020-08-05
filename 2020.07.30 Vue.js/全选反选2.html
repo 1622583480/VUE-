@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <dt>
+            <input type="checkbox" @change="all" v-model="allBool">
+            <span>全{{txt}}选</span>
+            <input type="checkbox" @change="revent">
+            <span>反选</span>
+        </dt>
+        <dt v-for="item in formList">
+            <input type="checkbox" v-model="newArr" :value="item.id" @change="select">
+            <span>{{item.name}}</span>
+        </dt>
+
+
+        <div>{{newArr}}</div>
+    </div>
+</body>
+<script src="../vue.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            formList: [
+                { id: 'A', name: 'A' },
+                { id: 'B', name: 'B' },
+                { id: 'C', name: 'C' },
+                { id: 'D', name: 'D' },
+                { id: 'E', name: 'E' },
+                { id: 'F', name: 'F' },
+                { id: 'G', name: 'G' },
+                { id: 'H', name: 'H' }
+            ],
+            newArr: [],
+            allBool: false,
+            txt: ''
+        },
+        methods: {
+            all() {
+                if (this.allBool) {
+                    this.formList.forEach(item => {
+                        this.newArr.push(item.id)
+                        this.txt = '不'
+                    })
+                } else {
+                    this.newArr = []
+                    this.txt = ''
+                }
+            },
+            revent() {
+                let res = [];
+                this.formList.forEach((item_m, index) => {
+                    if (this.newArr.indexOf(item_m.id) === -1) {
+                        res.push(item_m.id);
+                    }
+                })
+                this.newArr = res;
+                this.select()
+            },
+            select() {
+                // console.log(this.formList.length)
+                // console.log(this.newArr.length)
+                if (this.newArr.length == this.formList.length) {
+                    this.allBool = true
+                    this.txt = '不'
+                } else {
+                    this.allBool = false
+                    this.txt = ''
+                }
+            }
+        }
+    })
+</script>
+
+</html>

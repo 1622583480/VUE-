@@ -1,35 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <div id="app">
-        <input type="checkbox" @click="select" value="false">选项1
-        <input type="checkbox" @click="select" value="false">选项2
-        <input type="checkbox" @click="select" value="false">选项3
-        <input type="checkbox" @click="select" value="false">选项4
-        <input type="checkbox" @click="select" value="false">选项5
-        <input type="checkbox" @click="select" value="false">选项6
-        <input type="checkbox" @click="select" value="false">选项7
-        <input type="checkbox" @click="select" value="false">选项8
-        <input type="checkbox" @click="select" value="false">选项9
-        <input type="checkbox" @click="select" value="false">选项10
-        
+        <dt>
+            <input type="checkbox" v-model="allCheck" @change="all">
+            <span>全选</span>
+            <input type="checkbox" @change="reverse">
+            <span>反选</span>
+        </dt>
+        <dt v-for="(item,index) in formList">
+            <input type="checkbox" v-model="checkArr" :value=item.id>
+            <span>{{item.name}}</span>
+        </dt>
+        <h1>{{checkArr}}</h1>
     </div>
 </body>
-<script src="./vue.js"></script>
+<script src="../vue.js"></script>
 <script>
     var app = new Vue({
-        el:'#app',
-        data:{
-
+        el: '#app',
+        data: {
+            formList: [
+                { id: "myh", name: "AA" },
+                { id: "qwe", name: "bb" },
+                { id: "yjt", name: "cc" },
+                { id: "ip;", name: "dd" },
+                { id: "ert", name: "ee" },
+                { id: "dfg", name: "ff" },
+                { id: "xcz", name: "gg" },
+                { id: "vyh", name: "hh" },
+                { id: "ery", name: "jj" },
+            ],
+            checkArr: [],
+            allCheck: false
         },
-        methods:{
-
+        methods: {
+            all() {
+                this.checkArr = []
+                console.log(this.allCheck)
+                if (this.allCheck) {
+                    this.formList.forEach(item => {
+                        console.log(this.checkArr)
+                        this.checkArr.push(item.id)
+                    });
+                    this.txt = '全不选'
+                } else {
+                    this.checkArr = []
+                    this.txt = '全选'
+                }
+            },
+            reverse() {
+                let res = [];
+                let flag = true;
+                // this.formList.forEach((item_mList,index_mList) => {
+                //     this.checkArr.forEach((item,index) => {
+                //         if (this.checkArr.indexOf(item_mList.id) === -1) {
+                //             // -1 的情况代表没有 如果没有就添加 
+                //             this.checkArr.push(item_mList.id)
+                //         } else {
+                //             // 如果有就删掉 
+                //             this.checkArr.splice(index,1)
+                //         }
+                //     })
+                // });
+                for (var i = 0; i < this.formList.length; i++) {
+                    // 遍历 整个子项
+                    for (var j = 0; j < this.checkArr.length; j++) {
+                        // 遍历已经勾选的项目
+                        if(this.formList[i].id == this.checkArr[j]){
+                            // 判断是否 有列表项目 
+                            flag = true
+                        }  else{
+                            flag = false
+                        }
+                    }
+                    if(!flag){ 
+                        // 在判断完成之后 添加列表项 实现 添加 
+                        res.push(this.formList[i].id)
+                    }
+                }
+                this.checkArr = res;
+            }
         }
-    })
+    })  
 </script>
+
 </html>
