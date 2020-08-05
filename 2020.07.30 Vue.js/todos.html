@@ -9,11 +9,11 @@
 
 <body>
     <div id="app">
-        <input type="text" @input.prvent.enter="input" v-model="Val" @keydown.enter="add">
+        <input type="text" v-model="Val" @keydown.enter="add">
         <button @click.enter='add'>增加</button>
-        <template>
-            <div v-if="true" v-for="(item,index) in list" @click="delet(index,$event)">{{item}}</div>
-        </template>
+        <ul>
+            <li v-for="(item,index) in list" @click="delet(index)">{{item}}</li>
+        </ul>
     </div>
 </body>
 <script src="./vue.js"></script>
@@ -22,19 +22,20 @@
         el: '#app',
         data: {
             Val: '',
-            list: []
+            list: [],
+            reg:/\s/g
         },
         methods: {
-            input() {
-
-            },
             add() {
-                this.list.push(this.Val);
-                this.Val = ""
-                console.log(this.list)
+                
+                if (!this.reg.test(this.Val)) {
+                    alert("禁止添加空")
+                } else {
+                    this.list.push(this.Val);
+                    this.Val = ""
+                }
             },
-            delet(a, e) {
-                console.log(a)
+            delet(a) {
                 this.list.splice(a, 1)
             }
         }
