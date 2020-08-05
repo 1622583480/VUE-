@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+
+    </div>
+</body>
+<script src="../vue.js"></script>
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+
+        },
+        methods: {
+            getDom(d1, d2) {
+                let _this = this
+                let lineDiv = this.$refs[d1];
+                let dot = this.$refs[d2];
+                lineDiv.onmousedown = function (ev) {
+                    ev.preventDefault();
+                    let oEvent = ev || event;
+                    let ldX = oEvent.clientX - lineDiv.offsetLeft
+                    _this.bck = ldX;
+                    dot.onmouseover = function () {
+                        _this.flag = true
+                    }
+                    var num1 = (ldX / ((lineDiv.offsetWidth - dot.offsetWidth) / 100)).toFixed(0);
+                    num1 > 100 ? _this.num = 100 : _this.num = num1
+                    dot.style.left = ldX + 'px'
+                }
+                dot.onmousedown = function (ev) {
+                    ev.preventDefault();
+                    let _this = this
+                    var oEvent = ev||event;
+                    var disX = oEvent.clientX - disX;
+                    if(len<0){
+                        len=0
+                    }else if(len>lineDiv.offsetWidth-dot.offsetWidth){
+                        len = lineDiv.offsetWidth - dot.offsetWidth
+                    }
+                    _this.num = (len / ((lineDiv.offsetWidth - dot.offsetWidth)/100)).toFixed(0);
+                    _this.bck=len
+                    dot.style.left=len+'px'
+                }
+                
+            }
+
+        },
+    })
+</script>
+
+</html>

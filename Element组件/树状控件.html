@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    ul,
+    li {
+        list-style-type: none;
+        font-size: 16px;
+        line-height: 26px;
+        color: #606266;
+
+    }
+    .region2 {
+        padding-left: 16px;
+    }
+
+    form {
+        width: 80%;
+        margin: 20px auto;
+        border: 1px solid #eeeeee;
+        border-radius: 4px;
+    }
+
+    .checkbox {
+        display: inline-block;
+        border: 1px solid #dcdfe6;
+        border-radius: 2px;
+        box-sizing: border-box;
+        width: 14px;
+        height: 14px;
+        background-color: #fff;
+        z-index: 1;
+        transition: border-color .25s linear;
+        line-height: 10px;
+        text-align: center;
+        color: #fff;
+    }
+
+    .checkbox:hover {
+        border-color: #409eff;
+
+    }
+
+    .checkbox .iconfont {
+        font-family: "iconfont" !important;
+        font-size: 12px;
+        font-style: normal;
+    }
+
+    li>.icon-right-fill {
+        font-family: "iconfont" !important;
+        color: #c0c4cc;
+        font-size: 12px;
+
+    }
+
+
+    /* 选中添加效果 */
+    .active {
+        border-color: #409eff;
+        background-color: #409eff;
+    }
+
+    /* transition */
+    /* 旋转 */
+    .rotate {
+        display: inline-block;
+        transform: rotate(90deg);
+        transition: all 0.5s;
+        animation: rotates 0.5s linear both;
+    }
+</style>
+
+<body>
+    <div id="app">
+        <form action="">
+            <ul class="root">
+                <!-- 遍历获取第一级列表 -->
+                <li v-for='item1 in list' @click.stop="expendHandle(item1,item1.flag)">
+                    <span class="iconfont icon-right-fill" :class="{rotate:item1.flag}" v-show='item1.flag1'></span>
+                    <span class="checkbox" :class="{active:item1.selected}" @click.stop="selectHandle(item1)">
+                        <i class="iconfont icon-gou"></i>
+                    </span>
+                    <span>{{item1.title}}</span>
+                    <ul v-if="item1.flag">
+                        <!-- 遍历获取第二级列表 -->
+                        <li v-for="item2 in item1.children" @click.stop="expendHandle(item2)">
+                            <span class="iconfont icon-right-fill" :class="{rotate:item2.flag}"
+                                v-show='item2.flag1'></span>
+                            <span class="checkbox" :class="{active:item2.selected}"
+                                @click.stop="selectHandle(item1,item2)">
+                                <i class="iconfont icon-gou"></i>
+                            </span>
+                            <span>{{item2.title}}</span>
+                            <ul v-if="item2.flag">
+                                <!-- 遍历获取第三层列表 -->
+                                <li v-for="item3 in item2.children" @click.stop="expendHandle(item3)">
+                                    <span class="iconfont icon-right-fill" :class="{rotate:item3.flag}"
+                                        v-show='item3.flag1'></span>
+                                    <span class="checkbox" :class="{active:item3.selected}"
+                                        @click.stop="selectHandle(item1,item2,item3)">
+                                        <i class="iconfont icon-gou"></i>
+                                    </span>
+                                    <span>{{item3.title}}</span>
+                                    <ul v-if="item3.flag">
+                                        <!-- 遍历获取第四层列表 -->
+                                        <li v-for="item4 in item3.children" @click.stop="expendHandle(item4)">
+                                            <span class="iconfont icon-right-fill" v-show='item4.flag1'></span>
+                                            <span class="checkbox" :class="{active:item4.selected}"
+                                                @click.stop="selectHandle(item1,item2,item3,item4)">
+                                                <i class="iconfont icon-gou"></i>
+                                            </span>
+                                            <span>{{item4.title}}</span>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </form>
+    </div>
+</body>
+<script src="../vue.js"></script>
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+            list: [
+                {
+                    title: 'region1',
+                    flag: false,
+                    flag1: true,
+                    selected: false,
+                    children: [
+                        {
+                            title: 'zone1',
+                            flag: false,
+                            flag1: true,
+                            selected: false,
+                            children: [
+                                {
+                                    title: 'zone3',
+                                    flag: false,
+                                    flag1: true,
+                                    selected: false,
+                                    children: [
+                                        {
+                                            title: 'zone5',
+                                            flag: false,
+                                            flag1: true,
+                                            selected: false,
+                                        },
+                                        {
+                                            title: 'zone6',
+                                            flag: false,
+                                            flag1: true,
+                                            selected: false,
+                                        }
+                                    ]
+                                },
+                                {
+                                    title: 'zone4',
+                                    flag: false,
+                                    flag1: true,
+                                    selected: false,
+                                }
+                            ]
+                        },
+                        {
+                            title: 'zone2',
+                            flag: false,
+                            flag1: true,
+                            selected: false,
+                            children: [
+                                {
+                                    title: 'zone7',
+                                    flag: false,
+                                    flag1: true,
+                                    selected: false,
+                                    children: [
+                                        {
+                                            title: 'zone9',
+                                            flag: false,
+                                            flag1: true,
+                                            selected: false,
+                                        },
+                                        {
+                                            title: 'zone10',
+                                            flag: false,
+                                            flag1: true,
+                                            selected: false,
+                                        }
+                                    ]
+                                },
+                                {
+                                    title: 'zone8',
+                                    flag: false,
+                                    flag1: true,
+                                    selected: false,
+                                    children: [
+                                        {
+                                            title: 'zone11',
+                                            flag: false,
+                                            flag1: true,
+                                            selected: false,
+                                        },
+                                        {
+                                            title: 'zone12',
+                                            flag: false,
+                                            flag1: true,
+                                            selected: false,
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    title: 'region2',
+                    flag: false,
+                    flag1: true,
+                    selected: false,
+
+                }
+            ],
+        },
+        methods: {
+
+
+        },
+    })
+</script>
+
+</html>

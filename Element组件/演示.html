@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+
+    <div id="app">
+        <div>  <!-- 一整个input框 -->
+            <span></span>
+            <!-- 时钟图标按钮 -->
+            <input type="text">
+            <!-- 时间框 -->
+            <span></span>
+            <!-- 清空内容按钮 -->
+            <div> <!-- time_select_all 事时间选择器全部 -->
+                <div> <!-- 时间选择器内容部分(content) -->
+                    <div>
+                        <!-- hour小时 -->
+                        <ul>
+                            <li><span>00</span></li>
+                            <li v-for="(item, index) in 23"><span></span>{{item}}</li>
+                        </ul>
+                    </div>
+
+
+                    <div>
+                        <!-- minute分钟 -->
+                        <ul>
+                            <li><span>00</span></li>
+                            <li v-for="(item, index) in 59"><span></span>{{item}}</li>
+                        </ul>
+                    </div>
+
+
+                    <div>
+                        <!-- second秒 -->
+                        <ul>
+                            <li><span>00</span></li>
+                            <li v-for="(item, index) in 59"><span v-if="item<10">0</span>{{item}}</li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <div><!-- footer_button选择按钮 -->
+                    <button>取消</button>
+                    <button>确定</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+</body>
+
+</html>

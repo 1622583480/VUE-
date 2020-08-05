@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .A {
+        padding: 10px;
+        width: 220px;
+        height: 100px;
+        background-color: #ccc;
+        margin-bottom: 10px;
+    }
+</style>
+
+<body>
+    <div id="app">
+        <div class="btn">
+            <button @click='open1'>自动关闭</button>
+            <button @click='open2'>不会自动关闭</button>
+        </div>
+
+        <div :value="index" ref="box" v-if="list[index].flag" class="A" v-for="(item, index) in count" :key="index">
+            <h2>{{list[index].title}}{{index}}</h2>
+            <span>
+                {{list[index].content}}
+
+            </span>
+            <span @click="delet(item)">X</span>
+        </div>
+
+    </div>
+</body>
+<script src="../vue.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            count: 0,
+            list: [],
+            itemA: {
+                title: '标题',
+                content: '1212121212121212adijqeiqhkjbcsjfb',
+                flag: true,
+                num:0
+            }
+        },
+        methods: {
+            open1() {
+                this.count++;
+                ++this.itemA.num
+                this.list.push(this.itemA)
+            },
+            open2() {
+
+            },
+            
+            delet(index_in) {
+                console.log(this.list[index_in])
+            }
+        },
+
+    })
+</script>
+
+</html>
