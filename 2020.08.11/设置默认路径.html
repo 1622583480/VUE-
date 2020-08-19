@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+</body>
+<script src="./vue.js"></script>
+<script src="./vue-router.js"></script>
+<script>
+    var Index = {
+        template: `<h1>我是index</h1>`
+    }
+    var zhouchao = {
+        template: `<h1>我是zhouchao</h1>`
+    }
+    var feifei = {
+        template: `<h1>我是feifei</h1>`
+    }
+    var app = new Vue({
+        el: "#app",
+        router: new VueRouter({
+            routes: [
+                {
+                    path: '/index',
+                    name:'yufei',
+                    component: Index
+                },
+                {
+                    path: '/zhouchao',
+                    component: zhouchao  
+                },
+                {
+                    path:'/feifei',
+                    component:feifei
+                },
+                {
+                    path: '/',
+                    redirect: '/feifei'
+                    // redirect: {name:"yufei"}
+                    // 还可以别名
+                    // 设置重定向默认路径
+                },
+            ]
+        })
+
+    })
+</script>
+
+</html>

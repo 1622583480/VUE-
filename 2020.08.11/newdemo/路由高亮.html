@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+
+    .router-link-active {
+        color: rgb(80, 64, 253);
+        background-color: #ccc;
+    }
+
+    /* 在多级路由中 只会有一个被选中 */
+    /* 坑： 单独写一个 "/" 作为to的参数的时候   
+        其他的被匹配到的时候 比如 /list 这个字符串里面包含/
+        所以 / 也会被激活类名
+      */
+</style>
+
+<body>
+    <div id="app">
+        <router-link tag="span" to="/index">首页</router-link>
+        <router-link tag="span" to="/list">课程</router-link>
+        <router-view></router-view>
+
+
+
+
+    </div>
+
+</body>
+<script src="./vue.js"></script>
+<script src="./vue-router.js"></script>
+<script>
+    var Index = {
+        template: `
+        <div>
+            <h1>index</h1>
+        </div>
+        `
+    }
+    var list = {
+        template: `
+        <div>
+        <router-link tag="span" to="/list/p1">前端</router-link>
+        <router-link tag="span" to="/list/p2">Java</router-link>
+        <router-link tag="span" to="/list/p3">大数据</router-link>
+        <router-view></router-view>
+
+        </div>
+        `
+    }
+    var p1 = {
+        template: `<h1>p1</h1>`
+    }
+    var p2 = {
+        template: `<h1>p2</h1>`
+    }
+    var p3 = {
+        template: `<h1>p3</h1>`
+    }
+    var app = new Vue({
+        el: '#app',
+        router: new VueRouter({
+            routes: [
+                { path: '/index', component: Index },
+                { path: "/", component: Index,redirect: '/Index' },
+                
+                {
+                    // children代表当前 路由的子路由 
+                    // 子路由不能给 / 直接p1 
+                    // 或者 /list/p1
+                    path: "/list", component: list, children: [
+                        { path: 'p1', component: p1, },
+                        { path: 'p2', component: p2 },
+                        { path: 'p3', component: p3 },
+                        { path: "", redirect: '/list/p1' }
+
+                    ],
+
+                },
+            ]
+        })
+    })
+</script>
+
+</html>

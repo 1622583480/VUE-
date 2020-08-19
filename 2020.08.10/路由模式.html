@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 三种路由模式 -->
+        <!-- 常用有两种 -->
+        <!-- hash -->
+        <!-- histyory -->
+    </div>
+</body>
+<script src="./vue.js"></script>
+<script src="./vue-router.js"></script>
+<script>
+    var Index = {
+        template: `
+        <h1>我是index组件</h1>
+        `
+    }
+    var Adobe = {
+        template: `
+        <h1>我是index组件</h1>
+        `
+    }
+    var Router = new VueRouter({
+        router: [
+            // 里面的对象 
+            // 都是一些路由对象
+            {
+                path: '/', // 路由地址
+                name: 'Index', // 路由名称
+                component: Index, //注册路由组件
+
+                // 路由组件通过匹配路由"/" 或者匹配路由名称"Index"
+                // 加载路由组件 一个路由名称一个路由组件
+            },
+            {
+                path: '/abobe',
+                name: 'Adobe',
+                component: Adobe
+            }
+        ],
+        mod
+
+        // history 弊端 不利于seo(搜索引擎)
+        // 简单理解: 根据服务查找url 路径 (当前文件运行在哪一个服务上)
+
+        // Abstract:支持所有的javascript运行模式 如果发现没有浏览器的api
+        // 路由会自动强制进入这个模式(运行在node.js上面)
+
+        // hash:
+    })
+</script>
+
+</html>

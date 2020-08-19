@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 这里是使用我们的组件 -->
+        <el-count></el-count>
+    </div>
+</body>
+<script src="../vue.js"></script>
+<script>
+    // 什么是组件 
+    //  由多个html组成一个带有功能性的小demo
+
+    // 比如loading弹框: 
+
+    // ------------> 封装在一块以<组件名></组件名> 标签的方式存在 
+
+    //  我们可以将任意的一个功能封装成一个组件 
+
+    // vue当中 可以由全局组件和 局部组件 
+
+    // 注册组件命令  这里是全局组件
+    // 组件名必须要命名规范 
+    // 这里参数二的对象就是去实现组件功能
+    Vue.component("el-count", {
+        template: `
+        <div>
+            <button @click="reduce">-</button>
+            <span>{{count}}</span>
+            <button @click="add">+</button>
+        </div>`,
+        // 组件是独立的  组件内部数据是私有的 
+        // 函数内部声明的变量也是私有的 
+        // 所以data要赋值为函数 (父作用域不能访问子作用域)
+
+
+
+        // data 里面必须是 function(){} 且必须要有返回值 
+        // 且 返回值必须要是 对象 
+        data: function () {
+            return { //表示组件里面的数据 
+                count: 0,  // 这里count表示计数器 
+            }
+        },
+        methods:{ //这里不用函数是因为 我的方法要被其他人所调用访问 
+            add(){
+                console.log(this); //这里的this指向的是组件实例 
+                // 可以通过this 获取组件内部的data methods computed
+                ++this.count
+            },
+            reduce(){
+                --this.count
+            }
+            //  在某一个组件内容注册一个组件 再注册一个组件 
+            // 内部注册的就是私有组件
+        }
+    });
+
+    var app = new Vue({
+        el: '#app'
+    });
+</script>
+</html>

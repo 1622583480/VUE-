@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    a{
+        text-decoration: none;
+        color: black;
+    }
+    .router-link-active {
+        color:red;
+        background-color: #ccc;
+    }
+</style>
+        
+<body>
+    <div id="app">
+        <router-link to="/one">one</router-link>
+        <router-link to="/two">two</router-link>
+        <router-link to="/three">three</router-link>
+
+        <router-view style="border: 1px solid red;"></router-view>
+
+    </div>
+</body>
+<script src="./newdemo/vue.js"></script>
+<script src="./newdemo/vue-router.js"></script>
+<script>
+    var one = {
+        template: `
+        <h1>一级页面</h1>
+        `
+    }
+    var two = {
+        template: `
+        <div>
+        <router-link to="/two/first">first</router-link>
+        <router-link to="/two/second">second</router-link>
+
+        <router-view  style="border: 1px solid blue;"></router-view>
+    </div>
+        `
+    }
+    var three = {
+        template: `
+        <div>
+        <router-link to="/three/FirstF">第一个</router-link>
+        <router-link to="/three/SecondS">第二个</router-link>
+        <router-view style="border: 1px solid green;"></router-view>
+    </div>
+        `
+    }
+
+    var first = {
+        template: `
+       <h1>这里是二级页面first</h1>
+        `
+    }
+    var second = {
+        template: `
+       <h1>这里是二级页面的second</h1>
+        `
+        
+    }
+    var FirstF = {
+        template: `
+        <div>
+        <router-link to="/three/FirstF/a">a</router-link>
+        <router-link to="/three/FirstF/b">b</router-link>
+        <router-view  style="border: 1px solid yellow;"></router-view>
+    </div>
+        `
+    }
+    var SecondS = {
+        template: `
+        <div>
+        <router-link to="/three/SecondS/c">c</router-link>
+        <router-link to="/three/SecondS/d">d</router-link>
+        <router-view  style="border: 1px solid black;"></router-view>
+    </div>
+        `
+    }
+    var a = {
+        template: `<h1>这里是三级页面a</h1>`
+    }
+    var b = {
+        template: `<h1>这里是三级页面b</h1>`
+    }
+    var c = {
+        template: `<h1>这里是三级页面c</h1>`
+    }
+    var d = {
+        template: `<h1>这里是三级页面d</h1>`
+    }
+    var app = new Vue({
+        el: "#app",
+        router: new VueRouter({
+            routes: [
+                { path: "/", redirect: '/one' },
+                { path: "/one", component: one },
+                {
+                    path: "/two", component: two, children: [
+                        { path: "first", component: first },
+                        { path: "second", component: second },
+                        { path: "", redirect: "/two/first" }
+                    ]
+                },
+                {
+                    path: "/three", component: three, children: [
+                        {
+                            path: "FirstF", component: FirstF, children: [
+                                { path: "a", component: a },
+                                { path: "", redirect: "/three/FirstF/a" },
+                                { path: "b", component: b },
+                            ]
+                        },
+                        {
+                            path: "SecondS", component: SecondS, children: [
+                                { path: "c", component: c },
+                                { path: "", redirect: "/three/SecondS/c" },
+                                { path: "d", component: d },
+                            ]
+                        },
+                        { path: "", redirect: "/three/FirstF" }
+                    ]
+                },
+            ]
+        })
+    })
+</script>
+
+</html>

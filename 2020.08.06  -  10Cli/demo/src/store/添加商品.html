@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+
+    }
+
+    form {
+        width: 300px;
+        margin: 0 auto;
+        border: 1px solid #ccc;
+    }
+
+    form div {
+        margin-top: 10px;
+    }
+
+    .submit {
+        margin-top: 20px;
+        outline: none;
+        margin: 0 auto;
+    }
+</style>
+
+<body>
+    <div id="app">
+        <form>
+            <div>
+                <label for="">商品名称</label>
+                <input v-model="shopItem.name" type="text" placeholder="请输入商品名称">
+            </div>
+            <div>
+                <label for="">商品价格</label>
+                <input v-model="shopItem.price" type="text" placeholder="请输入价格">
+            </div>
+
+            <button class="submit" @click.prevent="addShopItem">添加内容</button>
+
+        </form>
+    </div>
+</body>
+<script src="./vue.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            shopItem: {
+                name: "",  // 商品名称
+                price: "", //商品价格
+            },
+            shopList: [],
+            flag: false, // ture代表商品存在
+        },
+        methods: {
+            addShopItem() {
+                for (let i = 0; i < this.shopList.length; i++) {
+                    let item = this.shopList[i];
+                    // if (typeof item === undefined) {
+                    // this.shopList.push({
+                    //     ...this.shopItem,
+                    //     id: new Date().getTime()
+                    //     // 目前没办法去重处理
+                    // });
+                    // return
+                    // };
+                    if (item.name === this.shopItem.name) {
+                        this.flag = true
+                    } else {
+                        this.flag = false
+                    }
+                };
+                if (!this.flag) {
+                    this.shopList.push({
+                        ...this.shopItem,
+                        id: new Date().getTime()
+                        // 目前没办法去重处理
+                    });
+                }
+                this.shopItem.name = "";
+                this.shopItem.price = "";
+
+
+                // this.list.forEach(item => {
+                // console.log(this.aa)
+            }
+        },
+        created() {
+            let shopListStorage = localStorage.getItem("shopList");
+            // console.log(res);
+            if (shopListStorage === null) {
+                localStorage.setItem("shopList", JSON.stringify(this.shopList))
+            } else {
+                // 非空 证明存在字段
+                this.shopList = JSON.parse(shopListStorage)
+            }
+        },
+        watch: {
+            shopList(val) {
+                console.log(val)
+                localStorage.setItem("shopList", JSON.stringify(val))
+            }
+        },
+    })
+</script>
+
+</html>

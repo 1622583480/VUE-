@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .list {
+        padding: 10px;
+    }
+
+    .Product {
+        width: 220px;
+        height: 220px;
+    }
+
+    .all_item {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        text-align: center;
+    }
+</style>
+
+<body>
+    <div id="app">
+        <router-view></router-view>
+        <div class="all_item">
+            <div class="list" v-for="(item, index) in Product" :key="index" :value="item.id">
+                <img class="Product" :src="item.img_list_url" alt="">
+                <router-link :to="{name:'defile',params:{ID:item.id}}">
+                    <h4>{{item.title}}</h4>
+                </router-link>
+            </div>
+
+        </div>
+    </div>
+</body>
+<script src="../2020.08.10/vue.js"></script>
+<script src="../2020.08.10/vue-router.js"></script>
+<script src="./jquery-3.5.1.js"></script>
+<script>
+
+    var defile = {
+        template: `
+    <h1>{{$route.params.id}}
+        {{$route.params.item}}</h1>
+        `,
+    }
+    var app = new Vue({
+        el: '#app',
+        data: {
+            Product: null
+        },
+        router: new VueRouter({
+            routes: [
+                {
+                    path: "/defile",
+                    name: 'defile',
+                    component: defile
+                },
+            ]
+        }),
+        created() {
+            $.ajax({
+                url: 'http://vebcoder.cn:9527/api/goodList',
+                data: {},
+                type: 'json',
+                method: 'GET',
+                success(data) {
+                    app.Product = data;
+                    console.log(this.Product);
+                },
+                error(err) {
+                    console.log(err)
+                }
+            })
+
+        },
+    });
+
+</script>
+
+</html>

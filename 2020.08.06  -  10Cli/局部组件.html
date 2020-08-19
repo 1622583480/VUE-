@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <wang-ui-hang></wang-ui-hang>
+
+        <!-- <gu-kun></gu-kun> -->
+        <!-- 这里Vue实例里面没注册 所以报错
+        表示未注册  -->
+    </div>
+</body>
+<script src="../vue.js"></script>
+<script>
+    var gukun = {
+        template:`<h1>AAAAAAAAAAAAAAA</h1>`
+    }  // 已经注册等待被使用 
+
+    //可以被注册为全局组件或者局部组件
+    var wyh = {
+// template 必须要有一个根标签 
+        template: `<div id="list">
+            <ul>
+                <li v-for="item in student">
+                    <strong>{{item.name}}</strong>
+                    <span>{{item.age}}</span>
+                    <span>{{item.dec}}</span>
+                    <gu-kun></gukun>
+                </li>
+            </ul>
+        </div>`,
+
+        data: function () {
+            return {
+
+                student: [
+                    { name: 'yyc', age: 13, dec: '你好我是杨同学' },
+                    { name: 'yyc', age: 13, dec: '你好我是杨同学' },
+                    { name: 'yyc', age: 13, dec: '你好我是杨同学' },
+                    { name: 'yyc', age: 13, dec: '你好我是杨同学' },
+                    { name: 'yyc', age: 13, dec: '你好我是杨同学' },
+                    { name: 'yyc', age: 13, dec: '你好我是杨同学' },
+
+                ]
+            }
+        },
+        components:{
+            "gu-kun":gukun
+        }
+    }
+    var app = new Vue({
+        el:"#app",
+        // 每一个组件下都有components
+        // 作用就是给自己注册一个组件
+        data:{
+
+        },
+        components:{
+            "wang-ui-hang":wyh,
+            // key是组件名称 
+            // value的具体的组件对象 
+            // 具体的组件信息
+        }
+    })
+</script>
+
+</html>

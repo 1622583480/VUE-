@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <button @click="$router.push('/feifei')">点击改路由</button>
+        <button @click="back">返回</button>
+        <router-view></router-view>
+    </div>
+</body>
+  <script src="./vue.js"></script>
+  <script src="./vue-router.js"></script>
+  <script>
+      var Index = {
+          template:`<h1>我是h1</h1>`
+      }
+      var app = new Vue({
+          el:'#app',
+        router:new VueRouter({
+            routes:[
+                {
+                    path:"/feifei",
+                    component:Index
+                }
+            ]
+        }),
+        // 所谓的编程式导航 就是通过api修改url地址 
+        methods: {
+            back(){
+                this.$router.back();
+                // 返回上一页
+            }
+        },
+      });
+    //   替换路由的两种方式 
+    // push() 新增数组内容 /a还在数组中 
+    // replace() 替换掉 /a就不会存在了 
+    // 且由于被删除了 所以不会留下history 历史记录
+  </script>
+</html>

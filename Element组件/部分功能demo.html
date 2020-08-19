@@ -144,10 +144,6 @@
     }
 
 
-    .scrollbar_view_inner {
-        overflow: hidden;
-    }
-
     .scrollbar_view::after {
         content: "";
         display: block;
@@ -156,27 +152,6 @@
     }
 
     .scrollbar_view::before {
-        content: "";
-        display: block;
-        width: 100%;
-        height: 80px;
-    }
-
-    .scrollbar_view_inner {
-        width: 32px;
-        flex-grow: 1;
-        text-align: center;
-        overflow: hidden;
-    }
-
-    .scrollbar_view_inner::after {
-        content: "";
-        display: block;
-        width: 100%;
-        height: 80px;
-    }
-
-    .scrollbar_view_inner::before {
         content: "";
         display: block;
         width: 100%;
@@ -261,11 +236,6 @@
     .Up_time>div:hover {
         color: #409eff;
     }
-
-    .time-panel_appear_inner {
-        height: 295px;
-        opacity: 1;
-    }
 </style>
 
 <body>
@@ -288,7 +258,7 @@
                                         v-if="item<10">0</span>{{item}}</li>
                             </ul>
                         </div>
-                        
+
                         <div class="scrollbar_view" @scroll.passive="getminuteScroll($event)"
                             @mouseleave="time_leave_second($event)">
                             <!-- 分钟 -->
@@ -298,7 +268,7 @@
                                         v-if="item<10">0</span>{{item}}</li>
                             </ul>
                         </div>
-                        
+
                         <div class="scrollbar_view" @scroll.passive="getsecondScroll($event)"
                             @mouseleave="time_leave_second($event)">
                             <!-- 秒 -->
@@ -333,7 +303,7 @@
             // 这里用time给input双向绑定
             // time = hour + ":" + minute + ":" + second 拼接而成
             hour: '00',
-            minute: '00',
+            minute: '00', 
             second: '00',
             // flag控制时间选择器的显示消失
             flag: false,
@@ -346,28 +316,132 @@
             Finish_time: [20, 30, 00],
         },
         methods: {
-            /**** 时间滚动条事件 ****/
-            gethourScroll(e) { },
-            getminuteScroll(e) { },
-            getsecondScroll(e) { },
+            gethourScroll(e) {
+                // 监听 小时滚动
+                // 监听 小时滚动
+                console.log(e.target.scrollTop)
+                let Top = parseInt(e.target.scrollTop / 32);
+                // if (this.time_initialization) {
+                //     this.time = Top + ':' + '00' + ":" + '00';
+                //     console.log(this.time)
+                //     this.time_initialization = false;
+                //     return;
+                // }
+                if (Top < 10) {
+                    Top = "0" + Top
+                    this.hour = Top
+                }
 
-            // 输入框获取焦点打开时间选择器
-            Select_complete() { },
-            // 时分秒列表的鼠标移开自动对齐
-            time_leave_second(e) { },
 
-            /*** 清空输入框按钮显示隐藏 ***/
-            Time_out() { },
-            Time_over() { },
+                if (Top >= this.set_time[0] && Top <= this.Finish_time[0]) {
+                    this.hour = Top
+                    this.time = this.hour + ':' + this.minute + ":" + this.second
+                } else {
+                    this.minute = "00"
+                    this.time = this.hour + ':' + this.minute + ":" + this.second
+                }
+            },
+            getminuteScroll(e) {
+                // 监听 分钟滚动
+                let Top = parseInt(e.target.scrollTop / 32);
+                if (Top < 10) {
+                    Top = "0" + Top
+                    this.minute = Top
+                }
 
-            // 右侧关闭按钮点击清空时间(input内容)
-            Empty_event() { },
-            // 下方button按钮确定或者取消时间关闭输入框
-            Determine_the_time() { },
-            // 时间被点击跳转对应时间
+
+                if (this.hour == this.set_time[0]) {
+                    // 判断是否在 小时规定的限制内 
+                    if (Top >= this.set_time[1]) {
+                        this.minute = Top
+                        this.time = this.hour + ':' + this.minute + ":" + this.second
+                    }
+                } else if (this.hour == this.Finish_time[0]) {
+                    if (Top <= this.Finish_time[1]) {
+                        if (Top == this.Finish_time[1]) {
+                            this.second = '00'
+                        }
+                        this.minute = Top
+                        this.time = this.hour + ':' + this.minute + ":" + this.second
+                    }
+                } else if (this.hour > this.set_time[0]) {
+                    this.minute = Top
+                    this.time = this.hour + ':' + this.minute + ":" + this.second
+                }
+            },
+
+            getsecondScroll(e) {
+                // 监听 秒数滚动
+                let Top = parseInt(e.target.scrollTop / 32);
+                if (Top < 10) {
+                    Top = "0" + Top
+                    this.second = Top
+                }
+
+
+                //判断 小时区间 如果不符合不做操作
+                if (this.hour >= this.set_time[0]) {
+                    if (this.hour == this.Finish_time[0] && this.minute < this.Finish_time[1]) {
+                        // 由于 在限定时间 20:30的时候 没法动秒数
+                        // 要在29的时候可以动 所以用<而不是<= 
+                        // 满足以上条件让秒数失效
+                        this.second = Top
+                        this.time = this.hour + ':' + this.minute + ":" + this.second
+                    } else if (this.hour == this.set_time[0] && this.minute >= this.set_time[1]) {
+                        //这里判断是否在18:30的时候 
+                        this.second = Top
+                        this.time = this.hour + ':' + this.minute + ":" + this.second
+
+                    } else if (this.hour > this.set_time[0] && this.hour < this.Finish_time[0]) {
+                        // 这里是正常小时在18-20之间
+                        this.second = Top
+                        this.time = this.hour + ':' + this.minute + ":" + this.second
+                    }
+                }
+            },
+
+            time_leave_second(e) {
+                //这里用于每一个列表鼠标移出的时候自动对齐
+                let Top = e.target.scrollTop % 32;
+                e.target.scrollTop -= Top
+            },
+            // 这里俩事件 用于控制时间点显示 显示消失
+            Select_complete() {
+                this.flag = true;
+                console.log('获取焦点事件触发', this.flag)
+            },
+            Time_over() {
+                if (this.time == '' || this.time == " ") {
+                    this.Empty_time = false
+                } else {
+                    this.Empty_time = true
+                }
+            },
+            // input的移入移出 此处用于控制右边清空按钮的显示隐藏
+            Time_out() {
+                this.Empty_time = false
+            },
+            Empty_event() {
+                // 右侧关闭按钮点击清空 时间(input内容)
+                this.time = ''
+            },
+            Determine_the_time() {
+                // 下方button按钮确定或者取消时间
+                this.flag = false;
+            },
+
             Time_position(index, e) {
+                this.flag = true;
+                document.querySelector('.any_event').focus();
+                console.log('列表项点击事件触发', this.flag)
                 e.target.parentNode.parentNode.scrollTop = (index + 1) * 32
             },
+            mounted() {
+                let { time_list_hour } = this.$refs
+                this.hour_inner = this.set_time[0]
+                time_list_hour.style.top = '-' + this.hour_inner * 32 + "px"
+            },
+
         },
     })
 </script>

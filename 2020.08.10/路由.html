@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+
+        <!-- 
+            这个作用    <router-view></router-view>
+            渲染路由组件
+            如果没有 
+            地址变更组件也不会渲染
+         -->
+        <!-- 
+               通过url地址匹配组件信息 -->
+        <!-- 有路由组件就渲染 -->
+
+    </div>
+</body>
+<script src="./vue.js"></script>
+<script src="./vue-router.js"></script>
+<script>
+    var Index = {
+        template: `
+          <h1>我是index组件</h1>
+          `
+    }
+    var Adobe = {
+        template: `
+          <h1>我是About组件</h1>
+          `
+    }
+    var Router = new VueRouter({
+        // 配置路由值为数组
+
+        routes: [
+            // 第一个路由信息
+            {
+                path: '/',  // 路由地址
+                name: "Index", // 路由名称
+                component: Index // 注册路由组件
+                // 路由组件：通过匹配路由'/'或者匹配路由名称'Index'  加载路由组件Index 
+                // 一个地址 一个路由名称,一个路由组件
+            },
+            // 第二个路由信息
+            {
+                path: '/Adobe',
+                name: 'Adobe',
+                component: Adobe
+            }
+        ],
+    });
+    // 路由 :url地址
+    // router -link
+    // router -view 
+    // 路由组件:通过url地址加载的组件:叫做路由组件
+    // 注册在路由对象上的组件叫做路由组件
+
+    // 如何实例化路由对象:路由对象有哪些内容?
+    // 如何通过vue获取路由对象
+
+    // 路由作用:实现微前端 单页面应用
+
+    // 注意区分路由实例和路由对象
+    var app = new Vue({
+        el: "#app",
+        router: Router,
+        // 绑定路由实例
+        // created() {
+        //     // 在Vue中获取路由实例
+        //     console.log(this.$Router);
+        // },
+
+    });
+
+// 路由对象中有
+// api   
+// 路由地址信息  该项包含在api中
+</script>
+
+</html>

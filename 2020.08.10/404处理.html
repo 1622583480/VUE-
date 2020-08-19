@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <router-link to="/"></router-link>
+        <router-link to=""></router-link>
+        <router-view></router-view>
+    </div>
+</body>
+<script src="./vue.js"></script>
+<script src="./vue-router.js"></script>
+<script>
+    var Index = {
+        template: `
+        <h1>我是Index</h1>
+        `
+    }
+    var Adobe = {
+        template: `
+        <h1>我是Adobe</h1>
+        `
+    }
+    var error = {
+        template: `
+        <h1>页面走丢了 404 Not Defind</h1>
+        `
+    }
+
+    var router = new VueRouter({
+        router: [
+            {
+                path: "/",
+                name: "Index",
+                component: Index,
+            }, {
+                path: "/adobe",
+                name: "Adobe",
+                component: Adobe,
+            }, {
+                path: "*",
+                name: "error",
+                component: error,
+            },{
+                // 匹配Adobe-任意信息
+                // /adobe/*
+                path: "/adobe-*",
+                name: "Adobe",
+                component: Adobe,
+            }
+            // 这里是有优先级排序的 *的优先级参考css
+            // 没有比它权值更高的情况下 没得选 就选择* 代表没有任何一个页面匹配
+        ]
+    });
+    var app = new Vu
+</script>
+
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+<div id="app">
+
+</div>
+
+</body>
+<script src="./vue.js"></script>
+<script src="./vue-router.js"></script>
+<script>
+    var app = new Vue({
+        el:'#app',
+        
+    })
+    var Index = {
+        template: `
+        <h1>我是index组件</h1>
+        `
+    }
+    var Adobe = {
+        template: `
+        <h1>我是index组件</h1>
+        `
+    }
+    var Router = new VueRouter({
+        router: [
+            // 里面的对象 
+            // 都是一些路由对象
+            {
+                path: '/', // 路由地址
+                name: 'Index', // 路由名称
+                component: Index, //注册路由组件
+
+                // 路由组件通过匹配路由"/" 或者匹配路由名称"Index"
+                // 加载路由组件 一个路由名称一个路由组件
+            },
+            {
+                path: '/abobe',
+                name: 'Adobe',
+                component: Adobe
+            }
+        ],
+        created() {
+            console.log(this.$route)
+        },
+    })
+</script>
+
+</html>
